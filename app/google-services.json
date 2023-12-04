@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1062679982796-b2vllfvm4oc3jl9b9eidqh9r6kd7rvcq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pt.g2.Jorge",
+            "certificate_hash": "72b03af51d779308f81f7a7d12f90eaa0df0cbc0"
+          }
+        },
+        {
           "client_id": "1062679982796-1d0qkdhslp4hsbes9v4qbarm82i2gj1m.apps.googleusercontent.com",
           "client_type": 3
         }

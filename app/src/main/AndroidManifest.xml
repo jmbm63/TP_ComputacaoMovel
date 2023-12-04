@@ -13,22 +13,16 @@
         android:theme="@style/Theme.My_Android_Jorge_A"
         tools:targetApi="31">
         <activity
+            android:name=".NumberVerification"
+            android:exported="false" />
+        <activity
             android:name=".LoginMobilePhone"
             android:exported="false" />
         <activity
             android:name=".ChatList"
             android:exported="false" />
         <activity
-            android:name=".LoginGoogleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AfterLoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".registerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

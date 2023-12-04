@@ -1,15 +1,15 @@
 package pt.g2.Jorge
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.Firebase
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -18,39 +18,69 @@ import java.util.concurrent.TimeUnit
 
 class LoginMobilePhone : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    lateinit var storedVerificationId:String
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_mobile_phone)
         auth =  Firebase.auth
 
+        // Callback function for Phone Auth
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                // This callback will be invoked in two situations:
+                // 1 - Instant verification. In some cases the phone number can be instantly
+                //     verified without needing to send or enter a verification code.
+                // 2 - Auto-retrieval. On some devices Google Play services can automatically
+                //     detect the incoming verification SMS and perform verification without
+                //     user action.
+                val intentVerification= Intent(this@LoginMobilePhone, NumberVerification::class.java)
+                startActivity(intentVerification)
+                finish()
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+                // This callback is invoked in an invalid request for verification is made,
+                // for instance if the the phone number format is not valid.
+                Toast.makeText(applicationContext, "Failed", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                // The SMS verification code has been sent to the provided phone number, we
+                // now need to ask the user to enter the code and then construct a credential
+                // by combining the code with a verification ID.
+                Log.d("TAG","onCodeSent:$verificationId")// Save verification ID and resending token so we can use them later
+                storedVerificationId = verificationId
+                resendToken = token
+
+                var intent = Intent(applicationContext, NumberVerification::class.java)
+                intent.putExtra("storedVerificationId",storedVerificationId)
+                startActivity(intent)
+            }
+        }
+
     }
+
+    /**
+     * Retrieve cell phone number then open next activity to type code number
+     */
     fun Number(view: View,credential: PhoneAuthCredential) {
 
+        val phoneNumber = findViewById<EditText>(R.id.number).text.toString()
 
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-
-                    val user = task.result?.user
-
-                    val intent = Intent(this@LoginMobilePhone, ChatList::class.java)
-                    startActivity(intent)
-                } else {
-                    // Sign in failed, display a message and update the UI
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
-                    }
-                    // Update UI
-                }
-            }
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phoneNumber) // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this) // Activity (for callback binding)
+            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
     }
-    /**
-     * objetivo é ler o numero de telemovel e enviar o codigo
-     * Pode ser aberto outro intent para abrir o codigo
-     */
-
 
 }
