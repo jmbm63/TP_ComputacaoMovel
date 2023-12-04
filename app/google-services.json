@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1062679982796",
+    "project_id": "g2teste-a0ef3",
+    "storage_bucket": "g2teste-a0ef3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062679982796:android:a2963625dc6509a2fc4869",
+        "android_client_info": {
+          "package_name": "pt.g2.Jorge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062679982796-1d0qkdhslp4hsbes9v4qbarm82i2gj1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIGki3uyZgZRHRBbH3q2w0m-IPThe7Ol4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062679982796-1d0qkdhslp4hsbes9v4qbarm82i2gj1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
