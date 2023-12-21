@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatList">
+    tools:context=".Chats.ChatList">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
@@ -17,19 +17,13 @@
         android:gravity = "center">
 
         <ListView
-            android:layout_width="405dp"
-            android:layout_height="539dp"
+            android:id="@+id/chatList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="1dp" />
-
-    <Button
-        android:id="@+id/LogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="doLogOut"
-        android:text="Log Out"
-        tools:layout_editor_absoluteX="310dp"
-        tools:layout_editor_absoluteY="682dp" />
-
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
