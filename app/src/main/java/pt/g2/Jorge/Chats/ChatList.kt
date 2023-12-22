@@ -25,13 +25,11 @@ class ChatList : AppCompatActivity() {
 
 
         listView.setOnItemClickListener { parent, view, position, id ->
-            upadteIntent()
+            val chatIntent= Intent(this@ChatList, ChatActivity::class.java)
+            startActivity(chatIntent)
         }
 
     }
 
-    private fun upadteIntent(){
-        val chatIntent = Intent(this@ChatList, ChatActivity::class.java)
-        startActivity(chatIntent)
-    }
+
 }
