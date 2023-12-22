@@ -1,4 +1,4 @@
-package pt.g2.Jorge
+package pt.g2.Jorge.Register
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import pt.g2.Jorge.Login.MainActivity
+import pt.g2.Jorge.R
 
 class registerActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -89,7 +88,9 @@ class registerActivity : AppCompatActivity() {
                 }else{
 
                     Toast.makeText(this, "Couldn't proceed with the regist: Try again", Toast.LENGTH_LONG).show()
-                    clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(R.id.confirmPassword))
+                    clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(
+                        R.id.confirmPassword
+                    ))
                 }
             }
         } else if (confirmPassword (password, confPassword) == false){
@@ -105,7 +106,9 @@ class registerActivity : AppCompatActivity() {
         }else{
 
             Toast.makeText(this, "Couldn't proceed with the regist: Try again", Toast.LENGTH_LONG).show()
-            clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(R.id.confirmPassword))
+            clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(
+                R.id.confirmPassword
+            ))
         }
     }
 }

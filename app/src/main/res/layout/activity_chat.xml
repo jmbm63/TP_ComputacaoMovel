@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chats.ChatActivity">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="676dp"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/SendMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginEnd="100dp"
+            android:clickable="true"
+            android:onClick="SendMessage"
+            app:srcCompat="@android:drawable/ic_menu_send" />
+
+        <EditText
+            android:id="@+id/TextMessage"
+            android:layout_width="300dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="50dp"
+            android:hint="Type Message"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="803dp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView_message_text"
+        android:layout_width="250dp"
+        android:layout_height="148dp"
+        android:maxWidth="250dp"
+        android:minWidth="250dp"
+        android:paddingStart="8dp"
+        android:paddingTop="100dp"
+        android:paddingEnd="8dp"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:text=""
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

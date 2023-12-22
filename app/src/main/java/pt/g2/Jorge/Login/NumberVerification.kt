@@ -1,25 +1,22 @@
-package pt.g2.Jorge
+package pt.g2.Jorge.Login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.auth
-
+import pt.g2.Jorge.Chats.ChatList
+import pt.g2.Jorge.R
 
 
 class NumberVerification : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
-    //TESTAR!!!!!!!!!!!!!!!!!!!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_number_verification)
@@ -28,6 +25,7 @@ class NumberVerification : AppCompatActivity() {
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -43,6 +41,7 @@ class NumberVerification : AppCompatActivity() {
                     }
                 }
             }
+
     }
 
     fun Confirm(view: View) {
