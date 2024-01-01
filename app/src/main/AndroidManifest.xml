@@ -16,10 +16,10 @@
         android:theme="@style/Theme.My_Android_Jorge_A"
         tools:targetApi="31">
         <activity
-            android:name=".Login.NumberVerification"
+            android:name=".Chats.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".Chats.ChatActivity"
+            android:name=".Login.NumberVerification"
             android:exported="false" />
         <activity
             android:name=".Login.LoginMobilePhone"
