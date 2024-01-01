@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.games.snapshot.Snapshot
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.database.DatabaseReference
@@ -51,9 +50,10 @@ class ChatList : AppCompatActivity() {
         })
 
         // when is pressed a chat
-        listView.setOnItemClickListener { _, _, _, _ ->
+        listView.setOnItemClickListener { parent, view, position, id ->
             updateActivity()
         }
+
     }
 
     private fun show() {
@@ -61,14 +61,12 @@ class ChatList : AppCompatActivity() {
     }
 
 
-    /**
+    /**u@gmail.com
      * When pressed a chat, it opens a new activity
      */
     private fun updateActivity() {
-
-        val loginIntent = Intent(this@ChatList, ChatActivity::class.java)
-        startActivity(loginIntent)
-
+        val intent = Intent(this, ChatActivity::class.java)
+        startActivity(intent)
     }
 
     private fun dataChange(listView: ListView, dataSnapshot: DataSnapshot, userNamesList: ArrayList<String>) {
