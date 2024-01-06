@@ -3,6 +3,7 @@ package pt.g2.Jorge.Login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import pt.g2.Jorge.Adapters.UserAdapter
 import pt.g2.Jorge.Chats.ChatList
 import pt.g2.Jorge.R
 import pt.g2.Jorge.databinding.ActivityMainBinding
@@ -76,8 +78,7 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "pt/g2/Jorge/Login", Toast.LENGTH_LONG).show()
 
-                    val user = auth.currentUser
-                    updateUI(user)
+                    fillAdapter()
 
                     //val chatsIntent = Intent( this@MainActivity, ChatList:: class.java)
                     //startActivity(chatsIntent)
@@ -113,13 +114,6 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * func to show the intent with the google accounts
-     *
-     * SE DER MERDA DEPOIS DO LOGIN MUITO PROVAVELMENTE É POR CAUSA DESTA CONDICAO
-     * APOS DE DAR LOGIN UMA VEZ COM O GOOGLE ELE ASSUMIA SEMPRE A MESMA CONTA
-     * ENTAO METI AQUELA CENA PRA PEDIR SMP O LOGIN QUANDO HOUVER LOGOUT OU ABRIR A APP
-     * PODE DAR MERDA NO SENTIDO EM QUE NÃO SEI SE O LOGOUT ESTA REALMENTE A FUNCIONAR
-     * OU SE AO APRESENTAR ESTA OPCAO ELE DE LOGIN AO NOVO MEN
-     *
      */
     private fun signIn() {
 
@@ -127,6 +121,27 @@ class MainActivity : AppCompatActivity() {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
+    }
+
+    /**
+     * fun to update the useradapter data class
+     *
+     */
+    private fun fillAdapter(){
+
+        val user = auth.currentUser
+
+        val userAdapter = UserAdapter(
+            userId = user?.uid ?: "",  // Replace with the actual user ID
+            userName = user?.displayName ?: "",  // Replace with the actual user name
+            email = user?.email ?: "",  // Replace with the actual user email
+            groupId = 2  // Replace with the actual group ID
+
+        )
+        Log.d("LoginData","username:${userAdapter.userName}")
+        Log.d("LoginData","useremail:${userAdapter.email}")
+
+        updateUI(user)
     }
 
     /**
@@ -140,8 +155,7 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(this, "Logged In With Google", Toast.LENGTH_LONG).show()
-                    val user = auth.currentUser
-                    updateUI(user)
+                    fillAdapter()
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this, "Could Not Login With Google", Toast.LENGTH_LONG).show()

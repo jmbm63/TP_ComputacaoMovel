@@ -1,6 +1,8 @@
 package pt.g2.Jorge.Adapters
 
 data class UserAdapter(
-    val userId: String,
-    val userName: String
+    var userId: String,
+    var userName: String,
+    var email: String,
+    var groupId: Int
 )
