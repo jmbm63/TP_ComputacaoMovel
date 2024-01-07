@@ -10,16 +10,22 @@ import android.content.Intent
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.database
+import pt.g2.Jorge.Adapters.UserAdapter
 import pt.g2.Jorge.Login.MainActivity
 import pt.g2.Jorge.R
 
 class registerActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         auth = Firebase.auth
 
+        database = Firebase.database.reference
     }
 
     /**
@@ -63,6 +69,31 @@ class registerActivity : AppCompatActivity() {
     }
 
     /**
+     * func used to update the real time database of firebase
+     */
+    private fun writeNewUser(userId: String, name: String, email: String) {
+        // Create a UserAdapter instance
+        val user = UserAdapter(userId, name, email, 2)
+
+        // Reference to the "users" node in your Firebase Realtime Database
+        val usersRef = FirebaseDatabase.getInstance().getReference("user")
+
+        // Set the user data under the user's ID node
+        //https://firebase.google.com/docs/database/android/read-and-write?hl=pt-br
+
+        usersRef.child(userId).setValue(user).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Data saved successfully
+                Toast.makeText(this, "User registration successful", Toast.LENGTH_LONG).show()
+            } else {
+                // Handle registration failure
+                val errorMessage = task.exception?.message
+                Toast.makeText(this, "User registration failed: $errorMessage", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    /**
      * In case on new user, its done the registration
      * if the password meets with the requirements then its done the registration on the database
      * otherwise the user needs to try again
@@ -77,6 +108,12 @@ class registerActivity : AppCompatActivity() {
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    val userId = user?.uid ?: ""
+                    val userName = user?.displayName ?: ""
+
+                    writeNewUser(userId, userName, email)
+
                     Toast.makeText(this, "Successful ", Toast.LENGTH_LONG).show()
 
                     val returnIntent = Intent(this@registerActivity, MainActivity::class.java)
@@ -88,9 +125,7 @@ class registerActivity : AppCompatActivity() {
                 }else{
 
                     Toast.makeText(this, "Couldn't proceed with the regist: Try again", Toast.LENGTH_LONG).show()
-                    clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(
-                        R.id.confirmPassword
-                    ))
+                    clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(R.id.confirmPassword))
                 }
             }
         } else if (confirmPassword (password, confPassword) == false){
@@ -107,8 +142,7 @@ class registerActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Couldn't proceed with the regist: Try again", Toast.LENGTH_LONG).show()
             clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password), findViewById(
-                R.id.confirmPassword
-            ))
+                R.id.confirmPassword))
         }
     }
 }
