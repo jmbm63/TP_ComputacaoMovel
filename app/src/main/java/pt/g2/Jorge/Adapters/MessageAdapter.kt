@@ -10,57 +10,17 @@ import com.google.firebase.auth.FirebaseAuth
 import pt.g2.Jorge.R
 
 
-class MessageAdapter(val context : Context, val messageList : ArrayList<MessageModal>):
-RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){
-    private val left = 0
-    private val right = 1
+data class Message (
+    var id:String,
+    var chatId: String,
+    var userId: String,
+    var date: Double,  // timestamp
+    var body: String,
+    var messageType: Int,
+    var readby: List<String> // userids que ja leram a mensagem
+)
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MessageAdapter.MessageViewHolder {
-        return if (viewType==right)
-        {
-            val messageView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycle_view_sender, parent,false)
-            return MessageViewHolder(messageView)
-        }
-       else
-        {
-            val messageView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycle_view_reciever, parent,false)
-            return MessageViewHolder(messageView)
 
-        }
 
-    }
 
-    override fun getItemViewType(position: Int): Int {
-        return if(messageList[position].sender== FirebaseAuth.getInstance().currentUser?.uid.toString())
-        {
-            left
-        }
-        else
-        {
-            right
-        }
-    }
-    override fun onBindViewHolder(holder: MessageAdapter.MessageViewHolder, position: Int) {
-        val list =messageList[position]
-        holder.message.text = list.message
-        holder.time.text = list.timeStamp
-
-    }
-
-    override fun getItemCount(): Int {
-       return messageList.size
-
-    }
-    class MessageViewHolder(view: View): RecyclerView.ViewHolder(view)
-    {
-        val message : TextView = view.findViewById(R.id.txtMessage)
-        val time : TextView = view.findViewById(R.id.txtTime)
-
-    }
-
-}
+//class MessageAdapter( val messageList : ArrayList<Message>): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){ }

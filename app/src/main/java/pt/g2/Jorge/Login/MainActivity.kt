@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
 import pt.g2.Jorge.Adapters.UserAdapter
 import pt.g2.Jorge.Chats.ChatList
 import pt.g2.Jorge.R
@@ -77,11 +78,8 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "pt/g2/Jorge/Login", Toast.LENGTH_LONG).show()
-
                     fillAdapter()
 
-                    //val chatsIntent = Intent( this@MainActivity, ChatList:: class.java)
-                    //startActivity(chatsIntent)
 
                 } else {
                     Toast.makeText(this, "Email or Password Wrong: Try again", Toast.LENGTH_LONG).show()
@@ -136,7 +134,6 @@ class MainActivity : AppCompatActivity() {
             userName = user?.displayName ?: "",  // Replace with the actual user name
             email = user?.email ?: "",  // Replace with the actual user email
             groupId = 2  // Replace with the actual group ID
-
         )
         Log.d("LoginData","username:${userAdapter.userName}")
         Log.d("LoginData","useremail:${userAdapter.email}")
@@ -145,17 +142,49 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
+     * func used to update the real time database of firebase
+     */
+
+    private fun writeNewUser(userId: String, name: String, email: String, groupId: Int) {
+        // Create a UserAdapter instance
+        val user = UserAdapter(userId, name, email, 2)
+
+        // Reference to the "users" node in your Firebase Realtime Database
+        val usersRef = FirebaseDatabase.getInstance().getReference("user")
+
+        // Set the user data under the user's ID node
+        //https://firebase.google.com/docs/database/android/read-and-write?hl=pt-br
+
+        usersRef.child(userId).setValue(user).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Data saved successfully
+                Toast.makeText(this, "User registration successful", Toast.LENGTH_LONG).show()
+            } else {
+                // Handle registration failure
+                val errorMessage = task.exception?.message
+                Toast.makeText(this, "User registration failed: $errorMessage", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+
+    /**
      * func of login with google button
      */
     fun loginGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-
+        val user = auth.currentUser
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Toast.makeText(this, "Logged In With Google", Toast.LENGTH_LONG).show()
                     fillAdapter()
+                    if (user != null) {
+                        writeNewUser(user.uid, user.displayName ?: "", user.email ?: "", 2)
+                    }
+
+                    Toast.makeText(this, "Logged In With Google", Toast.LENGTH_LONG).show()
+
                 } else {
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this, "Could Not Login With Google", Toast.LENGTH_LONG).show()
