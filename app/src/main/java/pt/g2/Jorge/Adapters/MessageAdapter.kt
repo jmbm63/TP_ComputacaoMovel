@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import pt.g2.Jorge.R
 
-
 data class Message (
     var id:String,
     var chatId: String,
@@ -23,4 +22,6 @@ data class Message (
 
 
 
-//class MessageAdapter( val messageList : ArrayList<Message>): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(){ }
+//class MessageAdapter(private val messages:List<Message>): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>
+
+

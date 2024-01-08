@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import pt.g2.Jorge.Adapters.UserAdapter
 import pt.g2.Jorge.Chats.ChatList
 import pt.g2.Jorge.R
@@ -29,14 +31,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: ActivityMainBinding
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = Firebase.auth
-
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -44,12 +47,11 @@ class MainActivity : AppCompatActivity() {
             .requestEmail()
             .build()
 
-            googleSignInClient = GoogleSignIn.getClient(this, gso)
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-            binding.Google.setOnClickListener {
-                signIn()
+        binding.Google.setOnClickListener {
+            signIn()
         }
-
     }
 
     /**
@@ -77,10 +79,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "pt/g2/Jorge/Login", Toast.LENGTH_LONG).show()
-                    fillAdapter()
-
-
+                    Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                    val user = auth.currentUser
+                    updateUI(user)
                 } else {
                     Toast.makeText(this, "Email or Password Wrong: Try again", Toast.LENGTH_LONG).show()
                     clearTextBoxes(findViewById<EditText>(R.id.emailAdress),findViewById(R.id.password))
@@ -125,20 +126,19 @@ class MainActivity : AppCompatActivity() {
      * fun to update the useradapter data class
      *
      */
-    private fun fillAdapter(){
-
+    private fun fillAdapter() {
         val user = auth.currentUser
 
-        val userAdapter = UserAdapter(
-            userId = user?.uid ?: "",  // Replace with the actual user ID
-            userName = user?.displayName ?: "",  // Replace with the actual user name
-            email = user?.email ?: "",  // Replace with the actual user email
-            groupId = 2  // Replace with the actual group ID
-        )
-        Log.d("LoginData","username:${userAdapter.userName}")
-        Log.d("LoginData","useremail:${userAdapter.email}")
-
-        updateUI(user)
+        if (user != null) {
+            val userAdapter = UserAdapter(
+                userId = user.uid ?: "",
+                userName = user.displayName ?: "",
+                email = user.email ?: "",
+                groupId = 2
+            )
+            // Update UI or store userAdapter data as needed
+            updateUI(user)
+        }
     }
 
     /**
@@ -146,25 +146,24 @@ class MainActivity : AppCompatActivity() {
      */
 
     private fun writeNewUser(userId: String, name: String, email: String, groupId: Int) {
-        // Create a UserAdapter instance
+
         val user = UserAdapter(userId, name, email, 2)
+        val usersCollection = firestore.collection("users")
 
-        // Reference to the "users" node in your Firebase Realtime Database
-        val usersRef = FirebaseDatabase.getInstance().getReference("user")
 
-        // Set the user data under the user's ID node
-        //https://firebase.google.com/docs/database/android/read-and-write?hl=pt-br
-
-        usersRef.child(userId).setValue(user).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                // Data saved successfully
-                Toast.makeText(this, "User registration successful", Toast.LENGTH_LONG).show()
-            } else {
-                // Handle registration failure
-                val errorMessage = task.exception?.message
-                Toast.makeText(this, "User registration failed: $errorMessage", Toast.LENGTH_LONG).show()
+        usersCollection.document(userId)
+            .set(user)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Data saved successfully
+                    Toast.makeText(this, "User registration successful", Toast.LENGTH_LONG).show()
+                    fillAdapter()
+                } else {
+                    // Handle registration failure
+                    val errorMessage = task.exception?.message
+                    Toast.makeText(this, "User registration failed: $errorMessage", Toast.LENGTH_LONG).show()
+                }
             }
-        }
     }
 
 
@@ -178,11 +177,10 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    fillAdapter()
                     if (user != null) {
                         writeNewUser(user.uid, user.displayName ?: "", user.email ?: "", 2)
                     }
-
+                    fillAdapter()
                     Toast.makeText(this, "Logged In With Google", Toast.LENGTH_LONG).show()
 
                 } else {

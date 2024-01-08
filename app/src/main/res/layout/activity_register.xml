@@ -16,44 +16,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity = "center">
 
-    <EditText
-        android:id="@+id/emailAdress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="email"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="254dp" />
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="105dp"
+            tools:layout_editor_absoluteY="254dp" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="301dp" />
+        <EditText
+            android:id="@+id/emailAdress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            tools:layout_editor_absoluteX="105dp"
+            tools:layout_editor_absoluteY="254dp" />
 
-    <EditText
-        android:id="@+id/confirmPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="confirm password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="301dp" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="301dp" />
 
-    <Button
-        android:id="@+id/Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:onClick="doRegister"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="527dp" />
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Confirm password"
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="301dp" />
+
+        <Button
+            android:id="@+id/Register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:onClick="doRegister"
+            tools:layout_editor_absoluteX="168dp"
+            tools:layout_editor_absoluteY="527dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
