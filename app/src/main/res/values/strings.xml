@@ -3,4 +3,6 @@
     <string name="lorem_ipsum" />
     <string name="profile_name">Profile Name</string>
     <string name="bio" />
+    <string name="label_sign_up">sing_up\n</string>
+    <string name="enter_name">Enter Name</string>
 </resources>

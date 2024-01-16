@@ -47,11 +47,7 @@ class MessageAdapter(private val messages: List<ChatMessage>, private val userId
         val timestamp: TextView = itemView.findViewById(R.id.textView_message_time)
     }
 
-    //override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
-    //   val inflater = LayoutInflater.from(parent.context)
-    //    val view = inflater.inflate(R.layout.text_message_send, parent, false)
-    //   return MessageViewHolder(view)
-    // }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         if (viewType == MESSAGE_TYPE_send) {
             val view =

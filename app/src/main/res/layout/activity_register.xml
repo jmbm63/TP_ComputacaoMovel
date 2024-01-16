@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/whats"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register.registerActivity">
@@ -15,6 +16,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity = "center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_sign_up"
+            android:textStyle="bold"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/userName"
@@ -23,23 +37,26 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
-            android:hint="Enter Name"
             android:inputType="textEmailAddress"
-            tools:layout_editor_absoluteX="105dp"
-            tools:layout_editor_absoluteY="254dp"
-            android:textColor="@color/colorText"/>
+            android:fontFamily="@font/gilroy_light"
+            android:background="@color/colorTextBackground"
+            android:hint="@string/enter_name"
+            android:padding="12dp"
+            android:textColor="@color/colorText"
+           />
 
         <EditText
             android:id="@+id/emailAdress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
+            android:fontFamily="@font/gilroy_light"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
             android:hint="Enter Email"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorTextBackground"
             android:inputType="textEmailAddress"
-            tools:layout_editor_absoluteX="105dp"
-            tools:layout_editor_absoluteY="254dp"
+            android:padding="12dp"
             android:textColor="@color/colorText"
             />
 
@@ -47,39 +64,41 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_light"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
-            android:hint="Enter Password"
             android:inputType="textPassword"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="301dp"
-            android:textColor="@color/colorText"/>
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorTextBackground"
+            android:hint="Enter Password"
+            android:padding="12dp"
+            android:textColor="@color/colorText"
+            />
 
         <EditText
             android:id="@+id/confirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_light"
             android:layout_marginStart="15dp"
+            android:inputType="textPassword"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
+            android:background="@color/colorTextBackground"
             android:hint="Enter Confirm password"
-            android:inputType="textPassword"
-            tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="301dp"
-            android:textColor="@color/colorText"/>
+            android:padding="12dp"
+            android:textColor="@color/colorText"
+            />
 
         <Button
             android:id="@+id/Register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
+            android:background="@color/colorPrimary"
+            android:layout_margin="15dp"
+            android:textColor="@color/colorAccent"
             android:text="Register"
-            android:onClick="doRegister"
-            tools:layout_editor_absoluteX="168dp"
-            tools:layout_editor_absoluteY="527dp" />
+             />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

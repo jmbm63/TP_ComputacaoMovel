@@ -28,5 +28,15 @@
     <color name="mycolor19">#8a3ab9</color>
     <color name="mycolor20">#BFBFBF</color>
 
+
+    <color name="colorPrimary">#813fd7</color>
+    <color name="colorPrimaryDark">#813fd7</color>
+    <color name="colorAccent">#FFFFFF</color>
     <color name="colorText">#464646</color>
+    <color name="colorDarkGray">#464646</color>
+    <color name="colorTextBackground">#f5f5f5</color>
+    <color name="colorItemLeft">#E6E4E4</color>
+    <color name="colorItemRight">#813fd7</color>
+    <color name="colorWhite">#fff</color>
+
 </resources>
