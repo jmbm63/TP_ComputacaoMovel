@@ -136,8 +136,10 @@ class MainActivity : AppCompatActivity() {
                 email = user.email ?: "",
                 groupId = 2
             )
+            writeNewUser(user.uid, user.displayName ?: "", user.email ?: "", 2)
+
             // Update UI or store userAdapter data as needed
-            updateUI(user)
+            //updateUI(user)
         }
     }
 
@@ -150,14 +152,15 @@ class MainActivity : AppCompatActivity() {
         val user = UserAdapter(userId, name, email, 2)
         val usersCollection = firestore.collection("users")
 
-
         usersCollection.document(userId)
             .set(user)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Data saved successfully
-                    Toast.makeText(this, "User registration successful", Toast.LENGTH_LONG).show()
-                    fillAdapter()
+                    //Toast.makeText(this, "User registration successful", Toast.LENGTH_LONG).show()
+                    //fillAdapter()
+                    val currentUser = auth.currentUser
+                    updateUI(currentUser)
                 } else {
                     // Handle registration failure
                     val errorMessage = task.exception?.message
@@ -176,11 +179,11 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
+
                     if (user != null) {
-                        writeNewUser(user.uid, user.displayName ?: "", user.email ?: "", 2)
+                        fillAdapter()
+                        //writeNewUser(user.uid, user.displayName ?: "", user.email ?: "", 2)
                     }
-                    fillAdapter()
                     Toast.makeText(this, "Logged In With Google", Toast.LENGTH_LONG).show()
 
                 } else {
@@ -201,7 +204,6 @@ class MainActivity : AppCompatActivity() {
 
         val intentMobilePhone = Intent( this@MainActivity, LoginMobilePhone:: class.java)
         startActivityForResult(intentMobilePhone,2)
-
     }
 
 

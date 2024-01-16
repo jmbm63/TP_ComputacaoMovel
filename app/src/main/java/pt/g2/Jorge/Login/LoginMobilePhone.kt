@@ -102,9 +102,4 @@ class LoginMobilePhone : AppCompatActivity() {
             Toast.makeText(applicationContext, "Please Enter Phone Number", Toast.LENGTH_LONG).show()
         }
     }
-
-
-
-
-
 }
