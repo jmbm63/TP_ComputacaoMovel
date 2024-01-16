@@ -18,48 +18,64 @@
 
         <EditText
             android:id="@+id/userName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Name"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:hint="Enter Name"
             android:inputType="textEmailAddress"
             tools:layout_editor_absoluteX="105dp"
-            tools:layout_editor_absoluteY="254dp" />
+            tools:layout_editor_absoluteY="254dp"
+            android:textColor="@color/colorText"/>
 
         <EditText
             android:id="@+id/emailAdress"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:hint="Enter Email"
             android:inputType="textEmailAddress"
             tools:layout_editor_absoluteX="105dp"
-            tools:layout_editor_absoluteY="254dp" />
+            tools:layout_editor_absoluteY="254dp"
+            android:textColor="@color/colorText"
+            />
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Password"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:hint="Enter Password"
             android:inputType="textPassword"
             tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="301dp" />
+            tools:layout_editor_absoluteY="301dp"
+            android:textColor="@color/colorText"/>
 
         <EditText
             android:id="@+id/confirmPassword"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Confirm password"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:hint="Enter Confirm password"
             android:inputType="textPassword"
             tools:layout_editor_absoluteX="103dp"
-            tools:layout_editor_absoluteY="301dp" />
+            tools:layout_editor_absoluteY="301dp"
+            android:textColor="@color/colorText"/>
 
         <Button
             android:id="@+id/Register"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
             android:text="Register"
             android:onClick="doRegister"
             tools:layout_editor_absoluteX="168dp"

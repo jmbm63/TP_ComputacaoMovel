@@ -27,4 +27,6 @@
     <color name="mycolor18">#3B5998</color>
     <color name="mycolor19">#8a3ab9</color>
     <color name="mycolor20">#BFBFBF</color>
+
+    <color name="colorText">#464646</color>
 </resources>
