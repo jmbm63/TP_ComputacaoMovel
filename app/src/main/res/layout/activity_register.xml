@@ -38,8 +38,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
             android:inputType="textEmailAddress"
-            android:fontFamily="@font/gilroy_light"
             android:background="@color/colorTextBackground"
+            android:fontFamily="@font/gilroy_bold"
             android:hint="@string/enter_name"
             android:padding="12dp"
             android:textColor="@color/colorText"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:fontFamily="@font/gilroy_light"
+            android:fontFamily="@font/gilroy_bold"
             android:layout_marginTop="5dp"
             android:hint="Enter Email"
             android:layout_marginEnd="15dp"
@@ -64,7 +64,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_light"
+            android:fontFamily="@font/gilroy_bold"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:inputType="textPassword"
@@ -79,7 +79,7 @@
             android:id="@+id/confirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_light"
+            android:fontFamily="@font/gilroy_bold"
             android:layout_marginStart="15dp"
             android:inputType="textPassword"
             android:layout_marginTop="5dp"
@@ -94,11 +94,10 @@
             android:id="@+id/Register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
             android:layout_margin="15dp"
-            android:textColor="@color/colorAccent"
+            android:background="@color/teal_200"
             android:text="Register"
-             />
+            android:textColor="@color/colorAccent" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

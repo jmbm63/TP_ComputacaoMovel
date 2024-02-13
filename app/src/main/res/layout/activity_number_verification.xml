@@ -20,20 +20,28 @@
 
         <EditText
             android:id="@+id/PinNumber"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:background="@color/colorTextBackground"
+            android:fontFamily="@font/gilroy_bold"
             android:inputType="number"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="288dp" />
+            android:padding="12dp"
+            android:textColor="@color/colorText"
+             />
 
         <Button
             android:id="@+id/ConfirmPin"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginEnd="2dp"
+            android:textColor="@color/colorAccent"
             android:onClick="Confirm"
             android:text="Confirm PIN"
-            tools:layout_editor_absoluteX="156dp"
-            tools:layout_editor_absoluteY="393dp" />
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
