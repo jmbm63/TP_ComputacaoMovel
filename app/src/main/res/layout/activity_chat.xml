@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/whats"
     tools:context=".Chats.ChatActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -98,9 +99,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:padding="8dp">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,7 +114,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:hint="Write message here" />
+                        android:hint="Write message here"
+                        android:fontFamily="@font/gilroy_light"
+                        android:layout_weight="1"
+                        android:inputType="text"
+                        android:background="@color/colorTextBackground"
+                        android:padding="12dp"
+                        android:textColor="@color/colorText"/>
 
                 </LinearLayout>
 
