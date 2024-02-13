@@ -3,12 +3,14 @@ package pt.g2.Jorge.Chats
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import pt.g2.Jorge.Adapters.chat
+import pt.g2.Jorge.Profile.ProfileActivity
 import pt.g2.Jorge.R
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -157,6 +159,11 @@ class ChatList : AppCompatActivity() {
     private fun generateChatId(length: Int = 20): String {
         val alphaNumeric = ('a'..'z') + ('A'..'Z') + ('0'..'9')
         return alphaNumeric.shuffled().take(length).joinToString("")
+    }
+
+    fun perfil(view: View) {
+        val ProfileActivityIntent = Intent(this, ProfileActivity::class.java)
+        startActivity(ProfileActivityIntent)
     }
 }
 

@@ -134,7 +134,10 @@ class MainActivity : AppCompatActivity() {
                 userId = user.uid ?: "",
                 userName = user.displayName ?: "",
                 email = user.email ?: "",
-                groupId = 2
+                groupId = 2,
+                "",
+                "",
+                0
             )
             writeNewUser(user.uid, user.displayName ?: "", user.email ?: "", 2)
 
@@ -149,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun writeNewUser(userId: String, name: String, email: String, groupId: Int) {
 
-        val user = UserAdapter(userId, name, email, 2)
+        val user = UserAdapter(userId, name, email, 2,"","",0)
         val usersCollection = firestore.collection("users")
 
         usersCollection.document(userId)

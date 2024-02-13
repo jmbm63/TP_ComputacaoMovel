@@ -71,9 +71,8 @@ class registerActivity : AppCompatActivity() {
      * func used to update thecloud firestore
      */
     private fun writeNewUser(userId: String, name: String, email: String) {
-        val user = UserAdapter(userId, name, email, 2)
+        val user = UserAdapter(userId, name, email, 2,"","",0)
         val usersCollection = firestore.collection("users")
-
 
         usersCollection.document(userId)
             .set(user)

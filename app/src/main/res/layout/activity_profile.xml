@@ -6,4 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".Profile.ProfileActivity">
 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity = "center">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars"/>
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Nome"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="text"/>
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Apelido"
+        android:ems="10"
+        android:hint="Apelido"
+        android:inputType="text"/>
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Idade"
+        android:ems="10"
+        android:hint="Idade"
+        android:inputType="number"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Update"
+        android:ems="10"
+        android:text="Atualizar"
+        android:onClick="Atualizar"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backspaceprofile"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        app:tint="@color/black"
+        android:src="@drawable/backspace"
+        tools:ignore="MissingConstraints" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
