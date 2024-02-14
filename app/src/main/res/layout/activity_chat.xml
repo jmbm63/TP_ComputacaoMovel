@@ -65,17 +65,18 @@
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
-    
+
     <LinearLayout
         android:id="@+id/linear1"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/message"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="595dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -88,22 +89,21 @@
         android:weightSum="3">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="451dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             app:cardBackgroundColor="#D7DAE4"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="10dp"
+            app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="351dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="361dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -111,7 +111,7 @@
 
                     <EditText
                         android:id="@+id/messageBox"
-                        android:layout_width="match_parent"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:hint="Write message here"
@@ -125,21 +125,24 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/sendImage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/send_image" />
 
         <ImageView
             android:id="@+id/sendMessage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="60dp"
             android:src="@drawable/send_message" />
-
 
     </LinearLayout>
 
-    
 </RelativeLayout>

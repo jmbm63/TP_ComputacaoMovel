@@ -24,6 +24,12 @@
             android:paddingTop="4dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             tools:text="@string/lorem_ipsum" />
+        <ImageView
+            android:id="@+id/imageView_message_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/message_bg" />
         <TextView
             android:id="@+id/textView_message_time"
             android:layout_width="wrap_content"
