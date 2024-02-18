@@ -7,21 +7,54 @@
     android:background="@drawable/whats"
     tools:context=".Chats.ChatList">
 
-
-    <Button
-        android:id="@+id/profileButton"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarChatList"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Perfil"
-        android:onClick="perfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="#2D9890"
+        tools:layout_editor_absoluteX="191dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/profileButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="perfil"
+            android:text="Perfil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/createGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="createGroup"
+            android:text="create group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/viewGroups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="groupViewer"
+            android:text="view Groups"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/profileButton"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarChatList"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ListView

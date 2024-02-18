@@ -13,8 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,9 +35,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messagesAdapter: MessageAdapter
     private lateinit var messagesListener: ListenerRegistration
     private val messagesList = ArrayList<ChatMessage>()
-
     private val PICK_IMAGE_REQUEST = 1
-
     private var selectedImageUri: Uri ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +46,6 @@ class ChatActivity : AppCompatActivity() {
         val userName = intent.getStringExtra("userName") // retrieve the username from the previous activity
         val userMessageId = intent.getStringExtra("userId")
         val messageId = intent.getStringExtra("chatId")
-
-        auth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
         Log.d("username", "Chat Activity UserName = $userName") // user que manda msg
         Log.d("username", "Chat Activity User Message ID = $userMessageId") // id do user que manda
         Log.d("username", "Chat Activity Message ID = $messageId") // id mensagem
@@ -62,6 +55,8 @@ class ChatActivity : AppCompatActivity() {
         val backspace = findViewById<ImageView>(R.id.backspace)
         val senImageButton= findViewById<ImageView>(R.id.sendImage)
 
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         messagesRecyclerView = findViewById(R.id.message)
         messagesAdapter = MessageAdapter(messagesList, auth.currentUser?.uid.orEmpty())
@@ -175,7 +170,7 @@ class ChatActivity : AppCompatActivity() {
                     for (document in snapshot.documents) {
                         val chatMessage = document.toObject(ChatMessage::class.java)
                         if (chatMessage != null) {
-                            if (chatMessage.userId != auth.currentUser?.uid) {
+                            if (!chatMessage.userId.contains(auth.currentUser?.uid)) {
                                 // Only add the message if the sender is not the current user
                                 messagesList.add(chatMessage)
                             }
@@ -207,7 +202,7 @@ class ChatActivity : AppCompatActivity() {
             } else if (messageText.isNotEmpty()) { // textos
 
                 // User sent a text message
-                val message = ChatMessage(userMessageId, messageId, currentUserId, Date().time, messageText, MessageType.TEXT.value, emptyList())
+                val message = ChatMessage(userMessageId, messageId, listOf(currentUserId), Date().time, messageText, MessageType.TEXT.value, emptyList())
 
                 val messagesCollection = firestore.collection("chats").document(messageId).collection("messages")
 
@@ -259,7 +254,7 @@ class ChatActivity : AppCompatActivity() {
 
         if (imageBytes != null) {
             // Create a message object with image data
-            val message = ChatMessage(userMessageId, messageId, currentUserId, Date().time,imageUri.toString(), MessageType.IMAGE.value, emptyList())
+            val message = ChatMessage(userMessageId, messageId, listOf(currentUserId), Date().time,imageUri.toString(), MessageType.IMAGE.value, emptyList())
             Log.d("MessageAdapter",imageUri.toString())
 
 

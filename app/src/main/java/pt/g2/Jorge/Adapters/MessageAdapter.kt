@@ -1,7 +1,6 @@
 package pt.g2.Jorge.Adapters
 
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +19,15 @@ import com.bumptech.glide.Glide
 data class ChatMessage(
     var id: String = "",
     var chatId: String = "",
-    var userId: String = "",
+    var userId: List<String> = emptyList(),
     var date: Long = 0,
     var body: String = "",
     var messagetype: Int = 0, // 1 texto, 2 imagens seq
     var readby: List<Byte> = emptyList()
-)
+) {
+    // Add a no-argument constructor
+    constructor() : this("", "", emptyList(), 0, "", 0, emptyList())
+}
 
 enum class MessageType(val value: Int) {
     TEXT(1),
@@ -63,16 +65,17 @@ class MessageAdapter(private val messages: List<ChatMessage>, private val userId
         }
     }
 
+
     override fun getItemViewType(position: Int): Int {
-        firebaseUser =FirebaseAuth.getInstance().currentUser
-
-        if(messages[position].userId == firebaseUser!!.uid){
-            return MESSAGE_TYPE_send
-        }else{
-            return MESSAGE_TYPE_receiver
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        val message = messages[position]
+        return if (message.userId.contains(firebaseUser?.uid.orEmpty())) {
+            MESSAGE_TYPE_send
+        } else {
+            MESSAGE_TYPE_receiver
         }
-
     }
+
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
 

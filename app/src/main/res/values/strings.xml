@@ -6,6 +6,7 @@
     <string name="label_sign_up">Sing_up\n</string>
     <string name="enter_name">Enter Name</string>
     <string name="label_sign_in">Sing_in</string>
-    <string name="enter_password">Enter Password</string> />
+    <string name="enter_password">Enter Password</string>
+    />
     />
 </resources>

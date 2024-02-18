@@ -16,7 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.My_Android_Jorge_A"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Chats.GroupViewerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Chats.GroupActivity"
+            android:exported="false" />
         <activity
             android:name=".Profile.ProfileActivity"
             android:exported="false" />

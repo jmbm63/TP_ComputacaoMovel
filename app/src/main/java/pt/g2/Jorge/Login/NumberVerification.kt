@@ -14,6 +14,7 @@ import pt.g2.Jorge.Chats.ChatList
 import pt.g2.Jorge.R
 
 
+
 class NumberVerification : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 

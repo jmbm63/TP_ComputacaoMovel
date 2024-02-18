@@ -9,9 +9,11 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import pt.g2.Jorge.Adapters.chat
-import pt.g2.Jorge.Profile.ProfileActivity
 import pt.g2.Jorge.R
+import pt.g2.Jorge.Adapters.chat
+import pt.g2.Jorge.Chats.ChatActivity
+import pt.g2.Jorge.Chats.GroupActivity
+import pt.g2.Jorge.Profile.ProfileActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -43,7 +45,7 @@ class ChatList : AppCompatActivity() {
 
                 for (document in documents) { // pass through the database and retrieve all of the usernames so it can be show on the list
                     val userId = document.getString("userId")
-                    if (userId != currentUserId) {
+                    if (!userId.equals(currentUserId)) {
                         val userName = document.getString("userName")
                         userName?.let {
                             userNamesList.add(it)
@@ -56,7 +58,7 @@ class ChatList : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d("Firestore", "Error getting documents: ", exception)
             }
-
+        
         // meter o id do men da lista pro chat
         listView.setOnItemClickListener { _, _, position, _ ->
             val selectedUserName = userNamesList[position]
@@ -92,7 +94,7 @@ class ChatList : AppCompatActivity() {
                     id = generateChatId(),
                     userIds = listOf(auth.currentUser?.uid.orEmpty(), userId).sorted(),
                     date = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(Date().time),
-                    name = "Chat with $selectedUserName"
+                    name = selectedUserName
                 )
 
                 // Add the new chat document to the "chats" collection
@@ -122,7 +124,6 @@ class ChatList : AppCompatActivity() {
     /**
      * seacrh to see if there is already one chat created between two users
      *
-     * Esta função ta com um erro qlqr que nao tou a conseguir descobrir mas nao afeta o programa
      */
 
     private fun findExistingChat(userId: String, onComplete: (Boolean, String?) -> Unit) {
@@ -145,7 +146,6 @@ class ChatList : AppCompatActivity() {
                             return@addOnCompleteListener
                         }
                     }
-
                     onComplete(false, null)
                 } else {
                     Log.e("username", "Error finding chat", task.exception)
@@ -164,6 +164,16 @@ class ChatList : AppCompatActivity() {
     fun perfil(view: View) {
         val ProfileActivityIntent = Intent(this, ProfileActivity::class.java)
         startActivity(ProfileActivityIntent)
+    }
+
+    fun createGroup(view: View) {
+        val groupActivityIntent = Intent(this, GroupActivity::class.java)
+        startActivity(groupActivityIntent)
+    }
+
+    fun groupViewer(view: View) {
+        val groupViewerIntent = Intent(this, GroupViewerActivity::class.java)
+        startActivity(groupViewerIntent)
     }
 }
 
